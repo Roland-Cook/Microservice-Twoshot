@@ -2,8 +2,8 @@
 
 Team:
 
-* Person 1 - Which microservice?
-* Person 2 - Which microservice?
+* Roland Cook - Shoes
+* Nicholas Russ - Hats
 
 ## Design
 
