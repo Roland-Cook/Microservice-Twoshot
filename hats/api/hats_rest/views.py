@@ -27,6 +27,7 @@ class HatListEncoder(ModelEncoder):
         "fabric",
         "color",
         "picture_url",
+        "location",
     ]
     encoders = {
         "location": LocationVOEncoder(),
@@ -36,26 +37,33 @@ class HatListEncoder(ModelEncoder):
 class HatDetailEncoder(ModelEncoder):
     model = Hat
     properties = [
-        "name"
+        "style_name",
+        "fabric",
+        "color",
+        "picture_url",
+        "location",
     ]
+    encoders = {
+        "location": LocationVOEncoder(),
+    }
 
 # Create your views here.
 # api_hat_list
 
 
 @require_http_methods(["GET", "POST"])
-def api_list_hats(request, location_vo_id=None):
+def api_list_hats(request):
     if request.method == "GET":
-        if location_vo_id is not None:
-            hats = Hat.objects.filter(location=location_vo_id)
-        else:
-            hats = Hat.objects.all()
+        hats = Hat.objects.all()
+        print(hats)
         return JsonResponse(
-            {"hats": hats}
+            {"hats": hats},
+            encoder=HatListEncoder,
         )
     else:
+        print("This is the request body: ", request.body)
         content = json.loads(request.body)
-
+        print("This is the content", content)
         try:
             location_href = content["location"]
             location = LocationVO.objects.get(import_href=location_href)
@@ -65,7 +73,7 @@ def api_list_hats(request, location_vo_id=None):
                 {"message": "Invalid location id"},
                 status=400
             )
-        
+
         hats = Hat.objects.create(**content)
         return JsonResponse(
             hats,
@@ -74,7 +82,9 @@ def api_list_hats(request, location_vo_id=None):
         )
 
 
-# api_create_hat
+# Get Detail
+
+
 
 
 # api_delete_hat
