@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import ShoeList from './shoeList';
 import HatList from './HatList';
-import ShoeForm from './CreateShoeForm';
 import Nav from './Nav';
 import CreateHatForm from './CreateHatForm';
 import CreateShoeForm from './CreateShoeForm';

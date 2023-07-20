@@ -1,4 +1,12 @@
+import React, { useState, useEffect } from 'react';
+
 function HatList(props) {
+    const [hats, setHats] = useState([]);
+
+    useEffect(() => {
+        setHats(props.hats);
+    }, [props.hats])
+
     if (props.hats === undefined) {
         return null
     }
@@ -7,6 +15,22 @@ function HatList(props) {
         "height" : "100px",
         "width" : "50%"
     }
+
+    const handleDelete = async (hatID) => {
+        const hatUrl = `http://localhost:8090/api/hats/${hatID}/`
+        console.log(hatUrl, hatID)
+        const fetchConfig = {
+            method: "DELETE",
+        }
+        const response = await fetch(hatUrl, fetchConfig);
+        if (response.ok) {
+            setHats(hats.filter(hat => hat.id !== hatID))
+        } else {
+            console.error('Failed to delete')
+        }
+    }
+
+
     return (
         <table className="table table-striped">
             <thead>
@@ -16,17 +40,21 @@ function HatList(props) {
                     <th>Color</th>
                     <th>Location</th>
                     <th>Image</th>
+                    <th>Delete item?</th>
                 </tr>
             </thead>
             <tbody>
                 {props.hats.map(hat => {
                     return (
                         <tr>
-                            <td>{ hat.style_name }</td>
-                            <td>{ hat.fabric }</td>
-                            <td>{ hat.color }</td>
-                            <td>Location Pending</td>
+                            <td key={hat.style_name}>{ hat.style_name }</td>
+                            <td key={hat.fabric}>{ hat.fabric }</td>
+                            <td key={hat.color}>{ hat.color }</td>
+                            <td key={hat.location.closet_name}>{hat.location.closet_name}</td>
                             <td> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
+                            <td key={hat.id}>
+                                <button className="btn btn-danger" onClick={() => handleDelete(hat.id)}>Delete</button>
+                            </td>
                         </tr>
                     )
                 })}
