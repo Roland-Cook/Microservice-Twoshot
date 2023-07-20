@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 import json
 # from .models import BinVO
@@ -16,12 +16,14 @@ class BinVOEncoder(ModelEncoder):
 class ShoeEncoder(ModelEncoder):
     model = Shoe
     properties = [
-        "name", "manufacturer", "color", "picture_url","id"
+        "name", "manufacturer", "color", "picture_url","bin",
     ]
 
     encoders = {
     "bin": BinVOEncoder(),
     }
+
+
 
 
 @require_http_methods(["GET", "POST"])
@@ -34,7 +36,13 @@ def api_shoes(request):
             )
         else:
             content = json.loads(request.body)
+            print(content)
             try:
+                bin_href = content["bin"]
+                print(bin_href)
+                bin = BinVO.objects.get(import_href=bin_href)
+                content["bin"] = bin
+                print(bin)
                 shoe = Shoe.objects.create(**content)
                 shoe.save()
                 return JsonResponse(
@@ -47,8 +55,19 @@ def api_shoes(request):
                 {"message": "Invalid state abbreviation"},
                 status=400,
             )
-        
-@require_http_methods(["DELETE"])
-def delete_shoe (request,id):
+
+
+@require_http_methods(["GET", "DELETE"])
+def api_shoe_detail(request,id):
+    if request.method == "GET":
+        shoe = Shoe.objects.get(id=id)
+        return JsonResponse(
+            shoe,
+            encoder=ShoeEncoder,
+            safe=False,
+        )
+    else:
         count, _ = Shoe.objects.filter(id=id).delete()
         return JsonResponse({"deleted": count > 0})
+
+        

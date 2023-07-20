@@ -5,27 +5,18 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 
-async function loadHats() {
-  const response = await fetch('http://localhost:8090/api/hats');
-  if (response.ok) {
-    const data = await response.json();
-      root.render(
-        <React.StrictMode>
-          <App hats={data.hats}/>
-        </React.StrictMode>
-      );
-  } else {
-    console.error(response);
-  }
-}
 
-async function loadShoes() {
+async function loadClothes() {
   const response = await fetch('http://localhost:8080/api/shoes/');
-  if (response.ok) {
+  const response2 = await fetch('http://localhost:8090/api/hats/');
+
+  if (response.ok && response2) {
     const data = await response.json();
+    const data2 = await response2.json();
+
         root.render(
       <React.StrictMode>
-        <App shoes={data.shoes} />
+        <App shoes={data.shoes} hats={data2.hats} />
       </React.StrictMode>
     );
 
@@ -35,6 +26,5 @@ async function loadShoes() {
 }
 
 
-loadHats();
 
-loadShoes();
+loadClothes();

@@ -3,7 +3,7 @@ function ShoeList(props) {
       return null
     }
     const styleObject = {
-        "font-size" : "10px",
+        "fontSize" : "10px",
         "height" : "100px",
         "width" : "50%"
   }

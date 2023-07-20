@@ -65,7 +65,6 @@ def api_list_hats(request):
                 {"message": "Invalid location id"},
                 status=400
             )
-
         hats = Hat.objects.create(**content)
         return JsonResponse(
             hats,
