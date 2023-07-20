@@ -3,7 +3,7 @@ function HatList(props) {
         return null
     }
     const styleObject = {
-        "font-size" : "10px",
+        "fontSize" : "10px",
         "height" : "100px",
         "width" : "50%"
     }
@@ -25,7 +25,7 @@ function HatList(props) {
                             <td>{ hat.style_name }</td>
                             <td>{ hat.fabric }</td>
                             <td>{ hat.color }</td>
-                            {/* <td>{ hat.location }</td> */}
+                            <td>Location Pending</td>
                             <td> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
                         </tr>
                     )
