@@ -7,8 +7,6 @@ from common.json import ModelEncoder
 from .models import LocationVO, Hat
 
 
-# Encoders
-# LocationVO Encoder
 class LocationVOEncoder(ModelEncoder):
     model = LocationVO
     properties = [
@@ -19,7 +17,6 @@ class LocationVOEncoder(ModelEncoder):
     ]
 
 
-# Hat Encoder (Possibly a list and Detail)
 class HatListEncoder(ModelEncoder):
     model = Hat
     properties = [
@@ -46,9 +43,6 @@ class HatDetailEncoder(ModelEncoder):
     encoders = {
         "location": LocationVOEncoder(),
     }
-
-# Create your views here.
-# api_hat_list
 
 
 @require_http_methods(["GET", "POST"])
@@ -80,7 +74,6 @@ def api_list_hats(request):
             encoder=HatDetailEncoder,
             safe=False,
         )
-
 
 
 @require_http_methods(["GET", "DELETE"])
