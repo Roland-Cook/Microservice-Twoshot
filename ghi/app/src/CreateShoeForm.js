@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 
-function ShoeForm (props) {
+function CreateShoeForm (props) {
 
 const [name, setName] = useState('');
 const [manufacturer, setManufacturer] = useState('');
@@ -45,6 +45,7 @@ const handleSubmit = async (event) => {
     data.manufacturer = manufacturer
     data.color = color
     data.picture_url = picture_url
+    data.bin = bin
 
     const shoeUrl = `http://localhost:8080/api/shoes/`;
     const fetchConfig = {
@@ -62,7 +63,10 @@ const handleSubmit = async (event) => {
     if (response.ok) {
 
       setName('');
-
+      setColor('')
+      setManufacturer('')
+      setBin('')
+      setPicture('')
     }
   }
 
@@ -101,7 +105,7 @@ return (
             <label htmlFor="manufacturer">Manufacturer</label>
           </div>
           <div className="form-floating mb-3">
-            <input onChange={handleColorChange} value={color} placeholder="City" required type="text" name={color} id="city" className="form-control"/>
+            <input onChange={handleColorChange} value={color} placeholder="color" required type="text" name={color} id="color" className="form-control"/>
             <label htmlFor="color">Color</label>
           </div>
           <div className="form-floating mb-3">
@@ -113,14 +117,14 @@ return (
             <option >Choose a bin</option>
                 {bins.map(bin => {
                   return (
-                    <option key={bin.id} value={bin.id}>
+                    <option key={bin.href} value={bin.href}>
                       {bin.closet_name}
                     </option>
                   );
                 })}
                 </select>
           </div>
-          <button className="btn btn-primary">Create</button>
+          <button type="submit" className="btn btn-primary">Create</button>
         </form>
       </div>
     </div>
@@ -128,4 +132,4 @@ return (
 );
 };
 
-export default ShoeForm
+export default CreateShoeForm
