@@ -57,7 +57,7 @@ function ShoeList(props) {
                   <td key ={shoe.color} >{ shoe.color }</td>
                   <td key ={shoe.picture_url} > <img style={styleObject} src={shoe.picture_url} alt={shoe.name}/></td>
                   <td key ={shoe.bin.closet_name} >{shoe.bin.closet_name}</td>
-                  <td > <button type="submit" onClick={() => {handleDelete(shoe.id)}}>DELETE</button> </td>
+                  <td> <button className="btn btn-danger" type="submit" onClick={() => {handleDelete(shoe.id)}}>DELETE</button> </td>
                 </tr>
 
               </>

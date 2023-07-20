@@ -109,7 +109,7 @@ return (
             <label htmlFor="color">Color</label>
           </div>
           <div className="form-floating mb-3">
-            <input onChange={handlePictureChange} value={picture_url} placeholder="Picture" required type="text" name={picture_url} id="picture_url" className="form-control"/>
+            <input onChange={handlePictureChange} value={picture_url} placeholder="Picture" type="url" required name={picture_url} id="picture_url" className="form-control"/>
             <label htmlFor="picture_url">Picture URL</label>
           </div>
           <div className="mb-3">
