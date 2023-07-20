@@ -55,9 +55,7 @@ def api_list_hats(request):
             encoder=HatListEncoder,
         )
     else:
-        print("This is the request body: ", request.body)
         content = json.loads(request.body)
-        print("This is the content", content)
         try:
             location_href = content["location"]
             location = LocationVO.objects.get(import_href=location_href)

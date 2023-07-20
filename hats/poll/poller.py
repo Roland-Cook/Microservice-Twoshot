@@ -14,7 +14,6 @@ django.setup()
 from hats_rest.models import LocationVO
 
 
-
 def get_locations():
     response = requests.get("http://wardrobe-api:8000/api/locations/")
     content = json.loads(response.content)
