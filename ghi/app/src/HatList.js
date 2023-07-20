@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 function HatList(props) {
-    const [hats, setHats] = useState([]);
-
-    useEffect(() => {
-        setHats(props.hats);
-    }, [props.hats])
+    const refresh = () => window.location.reload(true)
 
     if (props.hats === undefined) {
         return null
@@ -24,7 +20,7 @@ function HatList(props) {
         }
         const response = await fetch(hatUrl, fetchConfig);
         if (response.ok) {
-            setHats(hats.filter(hat => hat.id !== hatID))
+            refresh();
         } else {
             console.error('Failed to delete')
         }
@@ -51,7 +47,7 @@ function HatList(props) {
                             <td key={hat.fabric}>{ hat.fabric }</td>
                             <td key={hat.color}>{ hat.color }</td>
                             <td key={hat.location.closet_name}>{hat.location.closet_name}</td>
-                            <td> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
+                            <td key={hat.picture_url}> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
                             <td key={hat.id}>
                                 <button className="btn btn-danger" onClick={() => handleDelete(hat.id)}>Delete</button>
                             </td>
