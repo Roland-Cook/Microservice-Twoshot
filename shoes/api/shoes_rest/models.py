@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class BinVO(models.Model):
     import_href = models.CharField(max_length=200, unique=True)
@@ -12,11 +10,10 @@ class BinVO(models.Model):
 
 class Shoe(models.Model):
     name = models.CharField(max_length=100, null=True)
-    manufacturer = models.CharField(max_length=100,null=True)
+    manufacturer = models.CharField(max_length=100, null=True)
     color = models.CharField(max_length=50, null=True)
-    picture_url = models.URLField( null=True)
+    picture_url = models.URLField(null=True)
 
-    
     bin = models.ForeignKey(
         BinVO,
         related_name="bin",
