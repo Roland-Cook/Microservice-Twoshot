@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-
 function HatList(props) {
     const refresh = () => window.location.reload(true)
 
@@ -49,7 +47,7 @@ function HatList(props) {
                             <td key={hat.location.closet_name}>{hat.location.closet_name}</td>
                             <td key={hat.picture_url}> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
                             <td key={hat.id}>
-                                <button className="btn btn-danger" onClick={() => handleDelete(hat.id)}>Delete</button>
+                                <button className="btn btn-danger" onClick={() => handleDelete(hat.id)}>DELETE</button>
                             </td>
                         </tr>
                     )
