@@ -1,5 +1,5 @@
 function HatList(props) {
-    if (props.shoes === undefined) {
+    if (props.hats === undefined) {
         return null
     }
     const styleObject = {
@@ -25,8 +25,8 @@ function HatList(props) {
                             <td>{ hat.style_name }</td>
                             <td>{ hat.fabric }</td>
                             <td>{ hat.color }</td>
-                            <td>{ hat.location }</td>
-                            <td> <img style={styleObject} src={ hat.picture_url } alt={shoe.name}/> </td>
+                            {/* <td>{ hat.location }</td> */}
+                            <td> <img style={styleObject} src={ hat.picture_url } alt={hat.name}/> </td>
                         </tr>
                     )
                 })}
