@@ -8,8 +8,8 @@ function ShoeList(props) {
         "width" : "50%"
   }
 
-  console.log(props.shoes)
-    
+
+console.log(props.shoes[0].bin)
   return (
     <>
         <table className='table table-striped'>
@@ -19,6 +19,7 @@ function ShoeList(props) {
               <th>Manufacturer</th>
               <th>Color</th>
               <th>Image</th>
+              <th>Bin</th>
             </tr>
           </thead>
           <tbody>
@@ -27,11 +28,11 @@ function ShoeList(props) {
               <>
                 <tr>
                   <td>{ shoe.name }</td>
-                  <td>{ shoe.manufacturer }</td>
-                  <td>{ shoe.color }</td>
-                  <td> <img style={styleObject} src={shoe.picture_url} alt={shoe.name}/></td>
+                  <td key ={shoe.manufacturer} >{ shoe.manufacturer }</td>
+                  <td key ={shoe.color} >{ shoe.color }</td>
+                  <td key ={shoe.picture_url} > <img style={styleObject} src={shoe.picture_url} alt={shoe.name}/></td>
+                  <td key ={shoe.bin.closet_name} >{shoe.bin.closet_name}</td>
                 </tr>
-
 
               </>
               );
