@@ -81,7 +81,9 @@ def api_hat_detail(request, id):
     if request.method == "GET":
         hat = Hat.objects.get(id=id)
         return JsonResponse(
-            {"hat": hat}
+            hat,
+            encoder=HatDetailEncoder,
+            safe=False,
         )
     else:
         count, _ = Hat.objects.filter(id=id).delete()
