@@ -1,3 +1,5 @@
+import "./index.css"
+
 function MainPage() {
   return (
     <div className="px-4 py-5 my-5 text-center">
@@ -8,6 +10,7 @@ function MainPage() {
           the solution for you!
         </p>
       </div>
+      <img className="main-page-image" alt="img"  src="https://img.freepik.com/premium-photo/interior-room-monochrome-blue-color-with-clothes-hanger-room-accessories_576429-1246.jpg?w=2000"/>
     </div>
   );
 }
