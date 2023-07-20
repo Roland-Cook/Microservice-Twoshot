@@ -82,9 +82,14 @@ def api_list_hats(request):
         )
 
 
-# Get Detail
 
-
-
-
-# api_delete_hat
+@require_http_methods(["GET", "DELETE"])
+def api_hat_detail(request, id):
+    if request.method == "GET":
+        hat = Hat.objects.get(id=id)
+        return JsonResponse(
+            {"hat": hat}
+        )
+    else:
+        count, _ = Hat.objects.filter(id=id).delete()
+        return JsonResponse({"deleted": count > 0})
