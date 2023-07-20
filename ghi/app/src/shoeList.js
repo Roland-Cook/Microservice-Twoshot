@@ -7,6 +7,8 @@ function ShoeList(props) {
         "height" : "100px",
         "width" : "50%"
   }
+
+  console.log(props.shoes)
     
   return (
     <>
@@ -22,13 +24,16 @@ function ShoeList(props) {
           <tbody>
           {props.shoes.map(shoe => {
             return (
+              <>
                 <tr>
                   <td>{ shoe.name }</td>
                   <td>{ shoe.manufacturer }</td>
                   <td>{ shoe.color }</td>
                   <td> <img style={styleObject} src={shoe.picture_url} alt={shoe.name}/></td>
                 </tr>
-                
+
+
+              </>
               );
   })}
           </tbody>
