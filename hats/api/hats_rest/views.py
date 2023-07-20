@@ -49,7 +49,6 @@ class HatDetailEncoder(ModelEncoder):
 def api_list_hats(request):
     if request.method == "GET":
         hats = Hat.objects.all()
-        print(hats)
         return JsonResponse(
             {"hats": hats},
             encoder=HatListEncoder,
