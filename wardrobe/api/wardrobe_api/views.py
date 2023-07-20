@@ -28,36 +28,6 @@ class BinEncoder(ModelEncoder):
 
 @require_http_methods(["GET", "POST"])
 def api_locations(request):
-    """
-    Collection RESTful API handler for Location objects in
-    the wardrobe.
-
-    GET:
-    Returns a dictionary with a single key "locations" which
-    is a list of the closet name, section number, and shelf
-    number for the location, along with its href and id.
-
-    {
-        "locations": [
-            {
-                "id": database id for the location,
-                "closet_name": location's closet name,
-                "section_number": the number of the wardrobe section,
-                "shelf_number": the number of the shelf,
-                "href": URL to the location,
-            },
-            ...
-        ]
-    }
-
-    POST:
-    Creates a location resource and returns its details.
-    {
-        "closet_name": location's closet name,
-        "section_number": the number of the wardrobe section,
-        "shelf_number": the number of the shelf,
-    }
-    """
     if request.method == "GET":
         locations = Location.objects.all()
         return JsonResponse(
@@ -75,32 +45,6 @@ def api_locations(request):
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_location(request, pk):
-    """
-    Single-object API for the Location resource.
-
-    GET:
-    Returns the information for a Location resource based
-    on the value of pk
-    {
-        "id": database id for the location,
-        "closet_name": location's closet name,
-        "section_number": the number of the wardrobe section,
-        "shelf_number": the number of the shelf,
-        "href": URL to the location,
-    }
-
-    PUT:
-    Updates the information for a Location resource based
-    on the value of the pk
-    {
-        "closet_name": location's closet name,
-        "section_number": the number of the wardrobe section,
-        "shelf_number": the number of the shelf,
-    }
-
-    DELETE:
-    Removes the location resource from the application
-    """
     if request.method == "GET":
         try:
             location = Location.objects.get(id=pk)
@@ -124,7 +68,7 @@ def api_location(request, pk):
             )
         except Location.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             location = Location.objects.get(id=pk)
@@ -147,36 +91,6 @@ def api_location(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_bins(request):
-    """
-    Collection RESTful API handler for Bin objects in
-    the wardrobe.
-
-    GET:
-    Returns a dictionary with a single key "bins" which
-    is a list of the closet name, bin number, and bin size
-    for the bin, along with its href and id.
-
-    {
-        "bins": [
-            {
-                "id": database id for the bin,
-                "closet_name": bin's closet name,
-                "bin_number": the number of the bin,
-                "bin_size": the size of the bin,
-                "href": URL to the bin,
-            },
-            ...
-        ]
-    }
-
-    POST:
-    Creates a bin resource and returns its details.
-    {
-        "closet_name": bin's closet name,
-        "bin_number": the number of the bin,
-        "bin_size": the size of the bin,
-    }
-    """
     if request.method == "GET":
         bin = Bin.objects.all()
         return JsonResponse(
@@ -195,32 +109,6 @@ def api_bins(request):
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_bin(request, pk):
-    """
-    Single-object API for the Bin resource.
-
-    GET:
-    Returns the information for a Bin resource based
-    on the value of pk
-    {
-        "id": database id for the bin,
-        "closet_name": bin's closet name,
-        "bin_number": the number of the bin,
-        "bin_size": the size of the bin,
-        "href": URL to the bin,
-    }
-
-    PUT:
-    Updates the information for a Bin resource based
-    on the value of the pk
-    {
-        "closet_name": bin's closet name,
-        "bin_number": the number of the bin,
-        "bin_size": the size of the bin,
-    }
-
-    DELETE:
-    Removes the bin resource from the application
-    """
     if request.method == "GET":
         try:
             bin = Bin.objects.get(id=pk)
@@ -244,7 +132,7 @@ def api_bin(request, pk):
             )
         except Bin.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else: # PUT
+    else:
         try:
             content = json.loads(request.body)
             bin = Bin.objects.get(id=pk)
