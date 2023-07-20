@@ -14,7 +14,6 @@ function CreateHatForm(){
         if (response.ok) {
             const data = await response.json();
             setLocations(data.locations)
-            console.log(data, setLocations)
         } else {
             console.error('Error retrieving location data')
         }
@@ -47,11 +46,12 @@ function CreateHatForm(){
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
-        data.styleName = styleName;
+        data.style_name = styleName;
         data.fabric = fabric;
         data.color = color;
-        data.pictureUrl = pictureUrl;
+        data.picture_url = pictureUrl;
         data.location = location;
+        console.log(data)
 
         const hatUrl = 'http://localhost:8090/api/hats/';
         const fetchConfig = {
@@ -62,8 +62,8 @@ function CreateHatForm(){
             }
         }
         const response = await fetch(hatUrl, fetchConfig);
+        console.log(response)
         if (response.ok) {
-            const newHat = response.json();
             setStyleName('');
             setFabric('');
             setColor('');
@@ -81,39 +81,40 @@ function CreateHatForm(){
                 <h1 className="card-title">Create a hat.</h1>
                 <div className="col">
                     <div className="form-floating mb-3">
-                    <input required onChange={handleStyleChange} placeholder="Hat Style" type="text" id="hat_style" name="hat_style" className="form-control" />
+                    <input required onChange={handleStyleChange} value={styleName} placeholder="Hat Style" type="text" id="hat_style" name="hat_style" className="form-control" />
                     <label htmlFor="hat_style">Hat Style</label>
                     </div>
                 </div>
                 <div className="col">
                     <div className="form-floating mb-3">
-                    <input required onChange={handleFabricChange} placeholder="example Wool" type="text" id="fabric" name="fabric" className="form-control" />
+                    <input required onChange={handleFabricChange} value={fabric} placeholder="example Wool" type="text" id="fabric" name="fabric" className="form-control" />
                     <label htmlFor="fabric">Fabric</label>
                     </div>
                 </div>
                 <div className="col">
                     <div className="form-floating mb-3">
-                    <input required onChange={handleColorChange} placeholder="Color" type="text" id="color" name="color" className="form-control" />
+                    <input required onChange={handleColorChange} value={color} placeholder="Color" type="text" id="color" name="color" className="form-control" />
                     <label htmlFor="color">Color</label>
                     </div>
                 </div>
                 <div className="col">
                     <div className="form-floating mb-3">
-                    <input required onChange={handlePictureChange} placeholder="Color" type="url" id="picture_url" name="picture_url" className="form-control" />
+                    <input required onChange={handlePictureChange} value={pictureUrl} placeholder="Color" type="url" id="picture_url" name="picture_url" className="form-control" />
                     <label htmlFor="picture_url">Picture URL</label>
                     </div>
                 </div>
                 <div className="mb-3">
-                    <select onChange={handleLocationChange} name="location" id="location" className="form-select" required>
+                    <select onChange={handleLocationChange} value={location} name="location" id="location" className="form-select" required>
                         <option value="">What closet?</option>
                         {locations.map(location=>{
                         return(
-                            <option value={location.id} key={location.id}>{location.closet_name}</option>
+                            <option value={location.href} key={location.href}>{location.closet_name}</option>
                         )
                         })
                         }
                     </select>
                 </div>
+                <button className="btn btn-lg btn-primary">Add hat</button>
             </form>
         </div>
     )
