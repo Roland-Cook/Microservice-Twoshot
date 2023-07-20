@@ -76,9 +76,11 @@ function CreateHatForm(){
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} id="create-hat-form">
-                <h1 className="card-title">Create a hat.</h1>
+        <div className="row">
+        <div className="offset-3 col-6">
+            <div className="shadow p-4 mt-4">
+            <h1 className="card-title">Create a hat</h1>
+                <form onSubmit={handleSubmit} id="create-hat-form">
                 <div className="col">
                     <div className="form-floating mb-3">
                     <input required onChange={handleStyleChange} value={styleName} placeholder="Hat Style" type="text" id="hat_style" name="hat_style" className="form-control" />
@@ -114,8 +116,10 @@ function CreateHatForm(){
                         }
                     </select>
                 </div>
-                <button className="btn btn-lg btn-primary">Add hat</button>
-            </form>
+                <button className="btn btn-primary">Add hat</button>
+                </form>
+            </div>
+        </div>
         </div>
     )
 
