@@ -5,6 +5,7 @@ import HatList from './HatList';
 import ShoeForm from './CreateShoeForm';
 import Nav from './Nav';
 import CreateHatForm from './CreateHatForm';
+import CreateShoeForm from './CreateShoeForm';
 
 function App(props) {
   return (
@@ -16,7 +17,7 @@ function App(props) {
           <Route path = "/shoes" element ={<ShoeList shoes={props.shoes}/>}/>
           <Route path = "/hats" element ={<HatList hats={props.hats}/>}/>
           <Route path = "/hats/form" element ={<CreateHatForm/>}/>
-          <Route path = "/shoes/form" element ={<ShoeForm/>}/>
+          <Route path = "/shoes/form" element ={<CreateShoeForm/>}/>
         </Routes>
       </div>
     </BrowserRouter>
