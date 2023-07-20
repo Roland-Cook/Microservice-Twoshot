@@ -16,7 +16,7 @@ class BinVOEncoder(ModelEncoder):
 class ShoeEncoder(ModelEncoder):
     model = Shoe
     properties = [
-        "name", "manufacturer", "color", "picture_url","bin",
+        "name", "manufacturer", "color", "picture_url","bin","id"
     ]
 
     encoders = {
